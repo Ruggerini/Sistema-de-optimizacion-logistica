@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Optimizador de Rutas St. Joseph</title>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Optimizador de Rutas para Camiones de Reciclaje</h1>
+      <p>Distribuye camiones y optimiza rutas para St. Joseph con ayuda de Mapbox.</p>
+    </header>
+
+    <main>
+      <section id="auth-section" class="card">
+        <h2>Acceso</h2>
+        <div class="tabs">
+          <button id="tab-login" class="tab active" type="button">Iniciar sesi&oacute;n</button>
+          <button id="tab-register" class="tab" type="button">Registrarse</button>
+        </div>
+
+        <form id="login-form" class="form active">
+          <label>Email <input type="email" name="email" required /></label>
+          <label>Contrase&ntilde;a <input type="password" name="password" required /></label>
+          <button type="submit">Entrar</button>
+        </form>
+
+        <form id="register-form" class="form">
+          <label>ID de empresa <input type="text" name="company_id" required /></label>
+          <label>Nombre de empresa <input type="text" name="company_name" required /></label>
+          <label>Email <input type="email" name="email" required /></label>
+          <label>Contrase&ntilde;a <input type="password" name="password" minlength="8" required /></label>
+          <button type="submit">Crear cuenta</button>
+        </form>
+      </section>
+
+      <section id="builder-section" class="card hidden">
+        <h2>Configuraci&oacute;n diaria</h2>
+        <div class="grid">
+          <div>
+            <h3>Camiones</h3>
+            <form id="truck-form" class="form-inline">
+              <input type="text" name="name" placeholder="Nombre" required />
+              <input type="text" name="start" placeholder="Direcci&oacute;n de inicio" required />
+              <input type="text" name="end" placeholder="Direcci&oacute;n final" required />
+              <button type="submit">Agregar cami&oacute;n</button>
+            </form>
+            <ul id="truck-list" class="chip-list"></ul>
+          </div>
+          <div>
+            <h3>Puntos de recolecci&oacute;n</h3>
+            <form id="stop-form" class="form-inline">
+              <input type="text" name="address" placeholder="Direcci&oacute;n a visitar" required />
+              <button type="submit">Agregar parada</button>
+            </form>
+            <ul id="stop-list" class="chip-list"></ul>
+          </div>
+        </div>
+
+        <div class="actions">
+          <input type="date" id="execution-date" />
+          <button id="optimize-btn" type="button">Optimizar rutas</button>
+          <button id="reset-btn" type="button">Reiniciar</button>
+        </div>
+      </section>
+
+      <section id="results-section" class="hidden">
+        <div class="card">
+          <h2>Resumen de la jornada</h2>
+          <div id="summary"></div>
+        </div>
+        <div class="layout">
+          <div class="card list-card">
+            <h3>Asignaci&oacute;n de camiones</h3>
+            <div id="assignments"></div>
+          </div>
+          <div id="map-container" class="card">
+            <div id="map"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="history-section" class="card hidden">
+        <h2>Historial reciente</h2>
+        <ul id="history-list"></ul>
+      </section>
+    </main>
+
+    <footer>
+      <small>Hecho con Mapbox y FastAPI - Proyecto WM St. Joseph</small>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+    <script src="app.js" type="module"></script>
+  </body>
+</html>

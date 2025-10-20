@@ -1,5 +1,9 @@
+const defaultApiUrl = window.location.hostname.includes("localhost")
+  ? "http://localhost:8000"
+  : "https://sistema-de-optimizacion-logistica.onrender.com";
+
 const CONFIG = window.APP_CONFIG || {
-  apiBaseUrl: "http://localhost:8000",
+  apiBaseUrl: defaultApiUrl,
   mapboxToken: "",
 };
 

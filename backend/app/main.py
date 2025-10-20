@@ -37,3 +37,8 @@ app.include_router(routes.router)
 @app.get("/health")
 def health() -> dict:
     return {"status": "ok"}
+
+
+@app.get("/", tags=["system"])
+def root() -> dict:
+    return {"status": "ok", "message": "St. Joseph route optimizer API"}

@@ -11,16 +11,15 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title=settings.app_name)
 
-origins = [
+default_origins = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "http://localhost:5500",
     "http://127.0.0.1:5500",
-    "https://sistema-de-optimizacion-logistica.vercel.app",
-    "https://www.sistema-de-optimizacion-logistica.vercel.app",
 ]
+origins = list(dict.fromkeys(default_origins + settings.allowed_origins))
 
 app.add_middleware(
     CORSMiddleware,

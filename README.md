@@ -51,7 +51,7 @@ pip install -r requirements.txt
 cp .env.example .env
 ```
 
-Edita `.env` y establece `MAPBOX_TOKEN`, `SECRET_KEY` y demas variables segun tu entorno.
+Edita `.env` y establece `MAPBOX_TOKEN`, `SECRET_KEY` y demas variables segun tu entorno. Puedes definir varias URLs permitidas para CORS usando `ALLOWED_ORIGINS` separadas por comas (por ejemplo, agrega la URL de Vercel).
 
 ### Inicializar base de datos y usuario de prueba
 
@@ -108,6 +108,17 @@ Visita `http://localhost:5173` en tu navegador.
 - **Seguridad**: contrasenas cifradas con bcrypt y autenticacion via JWT Bearer.
 - **Persistencia**: SQLite por defecto; basta con cambiar `DATABASE_URL` para usar otro motor compatible.
 - **Google Maps**: cada ruta genera un enlace `https://www.google.com/maps/dir` con origen, destino y hasta nueve waypoints.
+
+## Pruebas del backend
+
+```bash
+cd backend
+pip install -r requirements.txt
+pip install -r requirements-dev.txt
+pytest
+```
+
+Los tests utilizan una base SQLite temporal y stubs para Mapbox, por lo que no consumen la cuota del token ni modifican datos reales.
 
 ## Proximos pasos sugeridos
 

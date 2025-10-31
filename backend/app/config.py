@@ -1,6 +1,7 @@
 from functools import lru_cache
-from typing import List
+from typing import List, Union
 
+from pydantic import field_validator
 from pydantic_settings import BaseSettings
 
 
@@ -19,6 +20,13 @@ class Settings(BaseSettings):
 
     class Config:
         env_file = ".env"
+
+    @field_validator("allowed_origins", mode="before")
+    @classmethod
+    def split_allowed_origins(cls, value: Union[str, List[str]]) -> List[str]:
+        if isinstance(value, str):
+            return [item.strip() for item in value.split(",") if item.strip()]
+        return value
 
 
 @lru_cache

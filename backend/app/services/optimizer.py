@@ -355,7 +355,7 @@ class OptimizationEngine:
         for stop in waypoints[: self.MAX_STOPS_PER_TRUCK]:
             loc = format_location(stop)
             if loc:
-                waypoint_entries.append(f"via:{loc}")
+                waypoint_entries.append(loc)
         waypoint_str = "|".join(waypoint_entries)
 
         params = {

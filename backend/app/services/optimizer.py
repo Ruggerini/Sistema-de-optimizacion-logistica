@@ -265,6 +265,15 @@ class OptimizationEngine:
         zone_label: str,
     ) -> TruckRoute:
         coordinates = [truck_locations["start"]] + stops + [truck_locations["end"]]
+        assigned_stop_details = [
+            StopDetail(
+                address=stop.address,
+                latitude=stop.latitude,
+                longitude=stop.longitude,
+                eta_minutes=None,
+            )
+            for stop in stops
+        ]
 
         coordinate_tuples = [(loc.latitude, loc.longitude) for loc in coordinates]
         optimization = self.mapbox.optimize_trip(coordinate_tuples)
@@ -301,7 +310,6 @@ class OptimizationEngine:
                     total_distance_km += distance_km
 
         google_maps_link = self._build_google_maps_link(stop_details)
-        assigned_stop_details = stop_details[1:-1] if len(stop_details) > 2 else []
 
         return TruckRoute(
             truck_id=truck.id,
@@ -353,3 +361,4 @@ class OptimizationEngine:
         if normalized:
             return f"{normalized}, {self.DEFAULT_CITY}"
         return self.DEFAULT_CITY
+

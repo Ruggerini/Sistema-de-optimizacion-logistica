@@ -2,7 +2,7 @@ import math
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
 
-import numpy as np
+import numpy as np`nfrom urllib.parse import quote_plus
 
 from ..schemas import (
     OptimizationRequest,

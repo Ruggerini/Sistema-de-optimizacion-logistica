@@ -343,16 +343,25 @@ class OptimizationEngine:
         destination = stops[-1]
         waypoints = stops[1:-1]
 
+        def format_location(stop: StopDetail) -> str:
+            if stop.address:
+                return quote_plus(stop.address)
+            if stop.latitude is not None and stop.longitude is not None:
+                return f"{stop.latitude},{stop.longitude}"
+            return ""
+
         waypoint_str = "|".join(
-            f"{stop.latitude},{stop.longitude}"
-            for stop in waypoints[: self.MAX_STOPS_PER_TRUCK]
-            if stop.latitude is not None and stop.longitude is not None
+            loc
+            for loc in (
+                format_location(stop) for stop in waypoints[: self.MAX_STOPS_PER_TRUCK]
+            )
+            if loc
         )
 
         params = {
             "api": "1",
-            "origin": f"{origin.latitude},{origin.longitude}",
-            "destination": f"{destination.latitude},{destination.longitude}",
+            "origin": format_location(origin),
+            "destination": format_location(destination),
         }
         if waypoint_str:
             params["waypoints"] = waypoint_str
@@ -372,4 +381,3 @@ class OptimizationEngine:
         if normalized:
             return f"{normalized}, {self.DEFAULT_CITY}"
         return self.DEFAULT_CITY
-

@@ -358,17 +358,12 @@ class OptimizationEngine:
                 waypoint_entries.append(loc)
         waypoint_str = "|".join(waypoint_entries)
 
-        params = {
-            "api": "1",
-            "origin": format_location(origin),
-            "destination": format_location(destination),
-            "travelmode": "driving",
-        }
+        segments = [format_location(origin)]
         if waypoint_str:
-            params["waypoints"] = waypoint_str
-
-        query = "&".join(f"{key}={value}" for key, value in params.items())
-        return f"https://www.google.com/maps/dir/?{query}"
+            segments.extend(waypoint_str.split("|"))
+        segments.append(format_location(destination))
+        path_segments = "/".join(segments)
+        return f"https://www.google.com/maps/dir/{path_segments}"
 
     def _normalize_address(self, address: str) -> str:
         if not address:

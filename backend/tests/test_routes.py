@@ -77,7 +77,9 @@ def test_optimize_and_history_flow(client):
     data = response.json()
     assert data["summary"]["trucks_needed"] == 1
     assert len(data["assignments"]) == 1
-    assert data["assignments"][0]["google_maps_link"].startswith("https://www.google.com/maps/dir") and "via%3A" in data["assignments"][0]["google_maps_link"]
+    link = data["assignments"][0]["google_maps_link"]
+    assert link.startswith("https://www.google.com/maps/dir/")
+    assert "4024+Hawksbury+Ct" in link and "1817+Prospect+Ave" in link
     assigned = data["assignments"][0]["assigned_stops"]
     assert len(assigned) == 1
     assert assigned[0]["address"].startswith("300 Main St")

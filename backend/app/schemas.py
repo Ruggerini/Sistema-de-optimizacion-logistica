@@ -70,6 +70,7 @@ class TruckRoute(BaseModel):
     google_maps_link: str
     mapbox_trip_id: Optional[str] = None
     geometry: Optional[dict] = None
+    assigned_stops: List[StopDetail] = Field(default_factory=list)
     stops: List[StopDetail]
 
 

@@ -357,3 +357,57 @@ footer {
     height: 360px;
   }
 }
+
+
+.assigned-section,
+.route-section {
+  margin-top: 0.6rem;
+}
+
+.assigned-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.35rem 0 0;
+}
+
+.assigned-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.25rem;
+}
+
+.section-title {
+  margin: 0.35rem 0 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(37, 99, 235, 0.65);
+  color: #f8fafc;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.history-assigned {
+  list-style: none;
+  margin: 0.35rem 0 0.5rem;
+  padding-left: 1rem;
+  color: #cbd5f5;
+}
+
+.history-no-stops {
+  margin: 0.25rem 0 0.5rem;
+  color: #94a3b8;
+  font-size: 0.85rem;
+}

@@ -109,6 +109,7 @@ class OptimizationEngine:
                         total_distance_km=0.0,
                         google_maps_link=self._build_google_maps_link(route_stops),
                         geometry=None,
+                        assigned_stops=[],
                         stops=route_stops,
                     )
                 )
@@ -300,6 +301,7 @@ class OptimizationEngine:
                     total_distance_km += distance_km
 
         google_maps_link = self._build_google_maps_link(stop_details)
+        assigned_stop_details = stop_details[1:-1] if len(stop_details) > 2 else []
 
         return TruckRoute(
             truck_id=truck.id,
@@ -310,6 +312,7 @@ class OptimizationEngine:
             google_maps_link=google_maps_link,
             mapbox_trip_id=trip.get("id"),
             geometry=trip.get("geometry"),
+            assigned_stops=assigned_stop_details,
             stops=stop_details,
         )
 

@@ -78,9 +78,13 @@ def test_optimize_and_history_flow(client):
     assert data["summary"]["trucks_needed"] == 1
     assert len(data["assignments"]) == 1
     assert data["assignments"][0]["google_maps_link"].startswith("https://www.google.com/maps/dir")
+    assigned = data["assignments"][0]["assigned_stops"]
+    assert len(assigned) == 1
+    assert assigned[0]["address"].startswith("300 Main St")
 
     history_response = client.get("/api/routes/history", headers=headers)
     assert history_response.status_code == HTTPStatus.OK
     history = history_response.json()
     assert len(history) == 1
     assert history[0]["truck_assignments"][0]["truck_name"] == "Camion Centro"
+    assert len(history[0]["truck_assignments"][0]["assigned_stops"]) == 1

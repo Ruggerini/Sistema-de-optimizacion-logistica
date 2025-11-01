@@ -227,6 +227,15 @@ const renderAssignments = (assignments) => {
   assignments.forEach((assignment, index) => {
     const routeCard = document.createElement("div");
     routeCard.className = "route-card";
+    const assignedStopsList =
+      assignment.assigned_stops && assignment.assigned_stops.length
+        ? assignment.assigned_stops
+            .map(
+              (stop, idx) =>
+                `<li><span class="badge">${idx + 1}</span> ${stop.address}</li>`
+            )
+            .join("")
+        : `<li>Sin paradas de recolección asignadas</li>`;
     const stopsList = assignment.stops
       .map(
         (stop) =>
@@ -237,7 +246,14 @@ const renderAssignments = (assignments) => {
       <h4>${assignment.truck_name} - ${assignment.zone_label}</h4>
       <p><strong>Duraci\u00f3n:</strong> ${assignment.total_duration_minutes} min - <strong>Distancia:</strong> ${assignment.total_distance_km} km</p>
       <a href="${assignment.google_maps_link}" target="_blank" rel="noopener">Ver en Google Maps</a>
-      <ul>${stopsList}</ul>
+      <div class="assigned-section">
+        <p class="section-title">Paradas de recolección</p>
+        <ul class="assigned-list">${assignedStopsList}</ul>
+      </div>
+      <div class="route-section">
+        <p class="section-title">Recorrido completo</p>
+        <ul>${stopsList}</ul>
+      </div>
     `;
     selectors.assignments.appendChild(routeCard);
   });
@@ -248,10 +264,17 @@ const renderHistory = (history) => {
   history.forEach((record) => {
     const li = document.createElement("li");
     const formatted = formatDateTimeCentral(record.run_date);
-    const routes = record.truck_assignments
-      .map(
-        (route) =>
-          `<li>${route.truck_name}: <a href="${route.google_maps_link}" target="_blank" rel="noopener">Google Maps</a></li>`
+  const routes = record.truck_assignments
+    .map(
+      (route) => {
+        const assigned =
+          route.assigned_stops && route.assigned_stops.length
+            ? `<ul class="history-assigned">${route.assigned_stops
+                .map((stop) => `<li>${stop.address}</li>`)
+                .join("")}</ul>`
+            : `<p class="history-no-stops">Sin paradas asignadas</p>`;
+        return `<li>${route.truck_name}: <a href="${route.google_maps_link}" target="_blank" rel="noopener">Google Maps</a>${assigned}</li>`;
+      }
       )
       .join("");
     li.innerHTML = `

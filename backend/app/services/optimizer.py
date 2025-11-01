@@ -351,18 +351,18 @@ class OptimizationEngine:
                 return f"{stop.latitude},{stop.longitude}"
             return ""
 
-        waypoint_str = "|".join(
-            loc
-            for loc in (
-                format_location(stop) for stop in waypoints[: self.MAX_STOPS_PER_TRUCK]
-            )
-            if loc
-        )
+        waypoint_entries = []
+        for stop in waypoints[: self.MAX_STOPS_PER_TRUCK]:
+            loc = format_location(stop)
+            if loc:
+                waypoint_entries.append(f"via:{loc}")
+        waypoint_str = "|".join(waypoint_entries)
 
         params = {
             "api": "1",
             "origin": format_location(origin),
             "destination": format_location(destination),
+            "travelmode": "driving",
         }
         if waypoint_str:
             params["waypoints"] = waypoint_str

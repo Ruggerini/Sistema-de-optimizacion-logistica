@@ -310,6 +310,9 @@ class OptimizationEngine:
                     cumulative_minutes += duration_minutes
                     total_distance_km += distance_km
 
+        if (len(stop_details) <= 2) and assigned_stop_details:
+            stop_details = [stop_details[0], *assigned_stop_details, stop_details[-1]]
+
         google_maps_link = self._build_google_maps_link(stop_details)
         ordered_assigned = stop_details[1:-1] if len(stop_details) > 2 else []
         if not ordered_assigned and stops:
@@ -377,3 +380,4 @@ class OptimizationEngine:
         if normalized:
             return f"{normalized}, {self.DEFAULT_CITY}"
         return self.DEFAULT_CITY
+

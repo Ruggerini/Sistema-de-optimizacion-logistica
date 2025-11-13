@@ -43,6 +43,15 @@ const selectors = {
   toggleHero: document.getElementById("toggle-hero"),
 };
 
+const showHero = () => {
+  if (!selectors.hero) return;
+  selectors.hero.classList.remove("hidden");
+  selectors.hero.classList.remove("collapsed");
+  if (selectors.toggleHero) {
+    selectors.toggleHero.textContent = "Ocultar introducción";
+  }
+};
+
 const formatDateTimeCentral = (value) => {
   if (!value) return "Fecha no disponible";
   const date = new Date(value);
@@ -310,7 +319,8 @@ const handleLogin = async (event) => {
     state.token = token.access_token;
     selectors.authSection.classList.add("hidden");
     selectors.builderSection.classList.remove("hidden");
-  selectors.resultsSection.classList.remove("hidden");
+    selectors.resultsSection.classList.remove("hidden");
+    showHero();
   requestAnimationFrame(() => {
     if (state.map) {
       state.map.resize();

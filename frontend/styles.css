@@ -455,3 +455,10 @@ footer {
   color: #94a3b8;
   font-size: 0.85rem;
 }
+
+.hero-header { display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+.ghost-btn { background:transparent; border:1px solid rgba(148,163,184,.6); color:#cbd5f5; padding:.5rem 1rem; border-radius:999px; cursor:pointer; transition:all .2s; font-size:.9rem; }
+.ghost-btn:hover { border-color:#60a5fa; color:#f8fafc; }
+.hero.collapsed .intro-grid { display:none; }
+.hero.collapsed p { margin-bottom:0; }
+

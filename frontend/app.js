@@ -39,6 +39,8 @@ const selectors = {
   tabRegister: document.getElementById("tab-register"),
   loginFormElem: document.getElementById("login-form"),
   registerFormElem: document.getElementById("register-form"),
+  hero: document.getElementById("hero"),
+  toggleHero: document.getElementById("toggle-hero"),
 };
 
 const formatDateTimeCentral = (value) => {
@@ -473,6 +475,14 @@ const setupMap = () => {
 
 const init = () => {
   setupMap();
+
+  if (selectors.toggleHero && selectors.hero) {
+    selectors.toggleHero.addEventListener("click", () => {
+      selectors.hero.classList.toggle("collapsed");
+      const collapsed = selectors.hero.classList.contains("collapsed");
+      selectors.toggleHero.textContent = collapsed ? "Mostrar introducción" : "Ocultar introducción";
+    });
+  }
 
   selectors.tabLogin.addEventListener("click", () => switchTab("login"));
   selectors.tabRegister.addEventListener("click", () => switchTab("register"));

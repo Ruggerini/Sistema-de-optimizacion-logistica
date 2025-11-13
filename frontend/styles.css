@@ -22,6 +22,24 @@ header {
   padding: 1.5rem 0 1rem;
 }
 
+.hero-intro {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.hero-intro h1 {
+  margin: 0;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.hero-intro p {
+  margin: 0.1rem 0 0;
+  color: #cbd5f5;
+  font-size: 1rem;
+}
+
 .hero {
   background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(14, 165, 233, 0.15));
   border-radius: 20px;
